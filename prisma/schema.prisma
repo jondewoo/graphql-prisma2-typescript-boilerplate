@@ -1,6 +1,6 @@
 datasource db {
-  provider = env(DB_PROVIDER)
-  url      = env(DB_URL)
+  provider = env("DB_PROVIDER")
+  url      = env("DB_URL")
 }
 
 generator photon {

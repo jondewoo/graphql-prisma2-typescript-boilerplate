@@ -17,7 +17,7 @@ const allTypes = [appTypes, nexusPrismaTypes];
 const schema = Nexus.makeSchema({
     types: allTypes,
     outputs: {
-        typegen: path.join(__dirname, '../../node_modules/@types/__nexus-typegen__nexus-core/index.d.ts'),
+        // typegen: path.join(__dirname, '../../node_modules/@types/__nexus-typegen__nexus-core/index.d.ts'),
         schema: path.join(__dirname, '../schema/generated/schema.graphql'),
     },
     typegenAutoConfig: {

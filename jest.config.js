@@ -12,6 +12,13 @@ module.exports = {
     preset: 'ts-jest',
     globalSetup: './tests/jest/globalSetup.ts',
     globalTeardown: './tests/jest/globalTeardown.ts',
+    globals: {
+        'ts-jest': {
+            diagnostics: {
+                ignoreCodes: 'TS7016',
+            },
+        },
+    },
     // testEnvironment: './test/config/environment/single-context-environment',
     // setupFilesAfterEnv: ['./jest.setup.js', 'jest-expect-message'],
     // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' })
