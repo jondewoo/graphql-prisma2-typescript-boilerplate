@@ -8,10 +8,15 @@ const getUserId = (ctxParams: ContextParameters, requireAuth = true): string | n
 
     if (header) {
         const token = header.replace('Bearer ', '');
-        const payload = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string };
-        if (!payload) throw new Error('Forbidden');
+        try {
+            const payload = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string };
+            if (!payload) throw new Error();
 
-        return payload.userId;
+            return payload.userId;
+        } catch (err) {
+            console.log(err);
+            throw new Error('Forbidden');
+        }
     }
 
     if (requireAuth) throw new Error('Authentication required');

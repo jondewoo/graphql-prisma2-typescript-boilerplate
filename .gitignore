@@ -39,3 +39,10 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+
+# Prisma
+prisma/*.db
+prisma/migrations
+
+# Visual Studio Code
+.vscode
