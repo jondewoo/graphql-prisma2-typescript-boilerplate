@@ -20,7 +20,7 @@ public/css/main.css
 coverage
 
 # API keys and secrets
-.env
+config/*.env
 
 # Dependency directory
 node_modules
@@ -42,7 +42,10 @@ yarn.lock
 
 # Prisma
 prisma/*.db
-prisma/migrations
 
 # Visual Studio Code
-.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

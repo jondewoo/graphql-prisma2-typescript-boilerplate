@@ -57,6 +57,7 @@
     "pretest": "prisma2 lift save --name \"init-test\" -c && prisma2 lift up",
     "pretest:local": "env-cmd -f ./config/test.env prisma2 lift save --name \"init-test\" -c && env-cmd -f ./config/test.env prisma2 lift up",
     "posttest": "rm -rf prisma/test.db prisma/migrations/*-init-test",
+    "posttest:local": "rm -rf prisma/test.db prisma/migrations/*-init-test",
     "test": "npx jest --runInBand",
     "test:local": "env-cmd -f ./config/test.env npx jest --runInBand",
     "test:watch": "env-cmd -f ./config/test.env npx jest --runInBand --watch"

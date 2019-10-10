@@ -12,6 +12,8 @@ const client: ApolloClient<NormalizedCacheObject> = getClient();
 
 beforeEach(seedDatabase);
 
+afterAll(async () => await photon.disconnect());
+
 describe('Mutation', () => {
     describe('signup', () => {
         test('Should create a new user', async () => {

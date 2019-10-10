@@ -8,5 +8,5 @@ module.exports = async (): Promise<void> => {
         () => console.log(`Server is running at http://localhost:${process.env.PORT || 4000}`),
     );
 
-    Object.assign(global, { httpServer });
+    Object.assign(global, { httpServer, photon: server.context().photon });
 };
