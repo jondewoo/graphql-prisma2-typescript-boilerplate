@@ -1,10 +1,9 @@
-import { ContextParameters } from 'graphql-yoga/dist/types';
 import { mutationType, arg } from 'nexus';
-import { Photon, User } from '@generated/photon';
+import { User } from '@generated/photon';
 import { UserSignupInput } from './UserSignupInput';
 import { UserLoginInput } from './UserLoginInput';
 import { hashPassword, comparePasswords } from '../utils/password';
-import generateToken from '../utils/generateToken';
+import { generateToken } from '../utils/token';
 import getUserId from '../utils/getUserId';
 
 const Mutation = mutationType({
@@ -14,7 +13,7 @@ const Mutation = mutationType({
             args: {
                 data: UserSignupInput.asArg({ required: true }),
             },
-            resolve: async (parent, { data }, { photon }: { photon: Photon }) => {
+            resolve: async (parent, { data }, { photon }) => {
                 try {
                     const user = await photon.users.findOne({ where: { email: data.email } });
                     if (user) {
@@ -46,7 +45,7 @@ const Mutation = mutationType({
             args: {
                 data: arg({ type: UserLoginInput, required: true }),
             },
-            resolve: async (parent, { data }, { photon }: { photon: Photon }) => {
+            resolve: async (parent, { data }, { photon }) => {
                 const { email, password } = data;
                 let user: User;
 
@@ -73,12 +72,12 @@ const Mutation = mutationType({
         });
 
         t.crud.updateOneUser({ alias: 'updateUser' });
-        t.modify('updateUser', {
-            resolve: async (
-                parent,
-                { data },
-                { photon, ctxParams }: { photon: Photon; ctxParams: ContextParameters },
-            ) => {
+        t.field('updateUser', {
+            type: 'User',
+            args: {
+                data: arg({ type: 'UserUpdateInput', nullable: false }),
+            },
+            resolve: async (parent, { data }, { photon, ctxParams }) => {
                 const userId = getUserId(ctxParams);
 
                 try {
@@ -101,8 +100,9 @@ const Mutation = mutationType({
         });
 
         t.crud.deleteOneUser({ alias: 'deleteUser' });
-        t.modify('deleteUser', {
-            resolve: async (parent, args, { photon, ctxParams }: { photon: Photon; ctxParams: ContextParameters }) => {
+        t.field('deleteUser', {
+            type: 'User',
+            resolve: async (parent, args, { photon, ctxParams }) => {
                 const userId = getUserId(ctxParams);
 
                 try {

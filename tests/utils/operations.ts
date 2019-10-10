@@ -27,6 +27,11 @@ const login = gql`
     mutation($data: UserLoginInput!) {
         login(data: $data) {
             token
+            user {
+                id
+                name
+                email
+            }
         }
     }
 `;
@@ -41,4 +46,24 @@ const getProfile = gql`
     }
 `;
 
-export { signup, login, getUsers, getProfile };
+const updateUser = gql`
+    mutation($data: UserUpdateInput!) {
+        updateUser(data: $data) {
+            id
+            name
+            email
+        }
+    }
+`;
+
+const deleteUser = gql`
+    mutation {
+        deleteUser {
+            id
+            name
+            email
+        }
+    }
+`;
+
+export { signup, login, getUsers, getProfile, updateUser, deleteUser };

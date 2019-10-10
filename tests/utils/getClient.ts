@@ -71,12 +71,13 @@ function getClient(
             uri: websocketURL,
             options: {
                 reconnect: true,
-                connectionParams: (): ConnectionParamsOptions => {
+                connectionParams: (): ConnectionParamsOptions | null => {
                     if (jwt) {
                         return {
                             Authorization: `Bearer ${jwt}`,
                         };
                     }
+                    return null;
                 },
             },
         }),

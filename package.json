@@ -48,11 +48,11 @@
     "style": "prettier --write 'src/**/*'",
     "start": "node dist/index.js",
     "heroku-postbuild": "rm -rf dist/ && tsc",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "dev": "env-cmd -f ./config/dev.env ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "generate": "yarn -s generate:prisma && yarn -s generate:nexus",
     "generate:prisma": "prisma2 generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "test": "env-cmd -f ./config/test.env npx jest --runInBand --forceExit",
+    "test": "env-cmd -f ./config/test.env npx jest --runInBand",
     "test:watch": "env-cmd -f ./config/test.env npx jest --runInBand --watch"
   },
   "keywords": [],

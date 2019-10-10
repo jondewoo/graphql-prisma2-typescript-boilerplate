@@ -1,26 +1,27 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { photon } from '../../src/photon';
+import { User } from '@generated/photon';
 
-const userOne = {
+type UserInput = { name: string; email: string; password: string };
+
+const userOne: { input: UserInput; unhashedPassword: string; user: User; jwt?: string } = {
     input: {
         name: 'Test 1',
         email: 'test1@example.com',
         password: bcrypt.hashSync('thisisatest1'),
     },
     unhashedPassword: 'thisisatest1',
-    user: undefined,
-    jwt: undefined,
+    user: { id: '', name: '', email: '', password: '' },
 };
 
-const userTwo = {
+const userTwo: { input: UserInput; user: User; jwt?: string } = {
     input: {
         name: 'Test 2',
         email: 'test2@example.com',
         password: bcrypt.hashSync('thisisatest2'),
     },
-    user: undefined,
-    jwt: undefined,
+    user: { id: '', name: '', email: '', password: '' },
 };
 
 const seedDatabase = async (): Promise<void> => {

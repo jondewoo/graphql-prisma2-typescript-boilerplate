@@ -3,13 +3,12 @@ import * as Nexus from 'nexus';
 import * as NexusPrisma from 'nexus-prisma';
 import { Query } from './Query';
 import { Mutation } from './Mutation';
-import { UserDef } from './UserDef';
-import { UserImpl } from './UserImpl';
+import { User } from './User';
 import { UserSignupInput } from './UserSignupInput';
 import { UserLoginInput } from './UserLoginInput';
 import { AuthPayload } from './AuthPayload';
 
-const appTypes = [Query, Mutation, UserDef, UserImpl, UserSignupInput, UserLoginInput, AuthPayload];
+const appTypes = [Query, Mutation, User, UserSignupInput, UserLoginInput, AuthPayload];
 const nexusPrismaTypes = NexusPrisma.nexusPrismaPlugin({
     types: appTypes,
 });

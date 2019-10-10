@@ -5,5 +5,6 @@ const hashPassword = (password: string): Promise<string> => {
     return bcrypt.hash(password, 10);
 };
 const comparePasswords = (password: string, hash: string): Promise<boolean> => bcrypt.compare(password, hash);
+const comparePasswordsSync = (password: string, hash: string): boolean => bcrypt.compareSync(password, hash);
 
-export { hashPassword, comparePasswords };
+export { hashPassword, comparePasswords, comparePasswordsSync };
