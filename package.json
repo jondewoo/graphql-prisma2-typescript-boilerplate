@@ -44,6 +44,7 @@
   },
   "scripts": {
     "postinstall": "yarn -s generate",
+    "postuninstall": "yarn -s generate",
     "clean": "rm -rf dist",
     "build": "yarn -s clean && yarn -s generate && tsc",
     "style": "prettier --write 'src/**/*'",
@@ -52,7 +53,7 @@
     "predev": "env-cmd -f ./config/dev.env yarn -s generate",
     "dev": "env-cmd -f ./config/dev.env ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "generate": "yarn -s generate:prisma && yarn -s generate:nexus",
-    "generate:prisma": "prisma2 generate",
+    "generate:prisma": "env-cmd -f ./config/dev.env prisma2 generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "pretest": "prisma2 lift save --name \"init-test\" -c && prisma2 lift up",
     "pretest:local": "env-cmd -f ./config/test.env prisma2 lift save --name \"init-test\" -c && env-cmd -f ./config/test.env prisma2 lift up",
