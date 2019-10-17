@@ -8,17 +8,9 @@ import { UserSignupInput } from './UserSignupInput';
 import { UserLoginInput } from './UserLoginInput';
 import { AuthPayload } from './AuthPayload';
 
-const appTypes = [Query, Mutation, User, UserSignupInput, UserLoginInput, AuthPayload];
-const nexusPrismaTypes = NexusPrisma.nexusPrismaPlugin({
-    types: appTypes,
-});
-const allTypes = [appTypes, nexusPrismaTypes];
-
 const schema = Nexus.makeSchema({
-    types: allTypes,
-    outputs: {
-        schema: path.join(__dirname, '../schema/generated/schema.graphql'),
-    },
+    types: [Query, Mutation, User, UserSignupInput, UserLoginInput, AuthPayload],
+    plugins: [NexusPrisma.nexusPrismaPlugin()],
     typegenAutoConfig: {
         contextType: 'Context.Context',
         sources: [
